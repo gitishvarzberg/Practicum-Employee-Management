@@ -1,0 +1,36 @@
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  width: 30vw;
+}
+
+.dialog-panel {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mat-form-field {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+button.mat-button.matSuffix {
+  width: 100%;
+  border-radius: 0 0 4px 4px;
+  background-color: #1976d2;
+  color: white;
+}
+
+button.mat-button.matSuffix:hover {
+  background-color: #1565c0;
+}
+
+button.mat-button.matSuffix:focus {
+  background-color: #1565c0;
+}

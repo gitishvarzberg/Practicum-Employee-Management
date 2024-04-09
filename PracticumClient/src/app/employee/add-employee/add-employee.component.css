@@ -1,0 +1,118 @@
+.example-container mat-form-field+mat-form-field {
+  margin-left: 8px;
+}
+
+.example-container {
+  margin-bottom: 20px;
+}
+
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.example-button-row .mat-mdc-button-base {
+  margin: 12px 12px 12px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.sub-form-container {
+  align-self: center;
+}
+
+.title {
+  padding-top: 8vh;
+  margin-bottom: 7vh;
+  text-align: center;
+  color: rgb(134, 125, 125);
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-row button {
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.mat-form-field {
+  width: 20vw;
+}
+
+.mat-mdc-button-base {
+  width: 200px;
+}
+
+.form-item {
+  margin-right: 50px;
+}
+
+.save {
+  width: 30vw;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-row-role {
+  display: flex;
+  justify-content: center;
+}
+
+.form-item-role {
+  margin: 0 8px;
+}
+
+.mat-form-field-role {
+  width: 13.7vw;
+}
+
+.roleForm {
+  margin-bottom: 10%;
+  margin-right: 2%;
+}
+
+.form-row-role button {
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+
+
+
+

@@ -1,0 +1,128 @@
+<h1 class="title">Editing employee details</h1>
+
+<form [formGroup]="detailsForm" class="form-container">
+  <div class="form-row">
+    <div class="form-item">
+      <mat-form-field class="mat-form-field">
+        <mat-label>Enter your First Name</mat-label>
+        <input matInput placeholder="First Name" formControlName="firstName" required>
+        <mat-error *ngIf="detailsForm.get('firstName').invalid">{{firstNameErrorMessage}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-item">
+      <mat-form-field class="mat-form-field">
+        <mat-label>Enter your Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="lastName" required>
+        <mat-error *ngIf="detailsForm.get('lastName').invalid">{{lastNameErrorMessage}}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-item">
+      <mat-form-field class="mat-form-field">
+        <mat-label>Enter your ID Number</mat-label>
+        <input matInput placeholder="ID Number" formControlName="identity" pattern="[0-9]{9}" required>
+        <mat-error *ngIf="detailsForm.get('identity').invalid">{{idNumberErrorMessage}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-item">
+      <mat-form-field class="mat-form-field">
+        <mat-label>Choose a Start Date</mat-label>
+        <input matInput [matDatepickerFilter]="myFilterStartDate" [matDatepicker]="picker"
+          formControlName="startOfWorkDate" readonly required>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="detailsForm.get('startOfWorkDate').invalid"></mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-item">
+      <mat-form-field class="mat-form-field">
+        <mat-label>Choose date of birth</mat-label>
+        <input class="input" matInput [matDatepicker]="picker2" formControlName="dateOfBirth">
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="dateOfBirthErrorMessage">{{dateOfBirthErrorMessage}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-item">
+      <mat-form-field class="mat-form-field">
+        <mat-label>Select Gender</mat-label>
+        <mat-select formControlName="gender" disableRipple>
+          <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.viewValue }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="detailsForm.get('gender').invalid">{{genderErrorMessage}}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <h1 class="title">editing roles</h1>
+
+  <div *ngFor="let form of detailsForm.get('roles')['controls']; let i = index" [ngSwitch]="i">
+    <ng-container [formGroup]="form">
+      <div class="form-row-role">
+        <div class="form-item-role">
+          <mat-form-field class="mat-form-field-role">
+            <mat-label>Select Role</mat-label>
+            <mat-select formControlName="roleNameId" (selectionChange)="onRoleSelectionChange($event,i)" disableRipple>
+              <mat-option *ngFor="let name of roleNames" [value]="name.id"
+                [disabled]="selectedRoleNameIds.includes(name.id)">
+                {{ name.id }}:{{ name.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error></mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-item-role">
+          <mat-form-field class="mat-form-field-role">
+            <mat-label>Managerial Role?</mat-label>
+            <mat-select formControlName="isManagerialRole" disableRipple>
+              <mat-option [value]="true">Managerial</mat-option>
+              <mat-option [value]="false">Not Managerial</mat-option>
+            </mat-select>
+            <mat-error></mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-item-role">
+          <mat-form-field class="mat-form-field-role">
+            <mat-label>Date Of Entry in to Role</mat-label>
+            <input matInput [matDatepickerFilter]="myFilterdateOfEntryIntoRole" [matDatepicker]="picker3"
+              formControlName="dateOfEntryIntoRole" readonly>
+            <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+            <mat-error></mat-error>
+          </mat-form-field>
+        </div>
+        <button mat-icon-button color="warn" [disabled]="showAddRoleForm" (click)="removeRole(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <ng-container
+        *ngIf="form.controls['roleNameId'].errors || form.controls['dateOfEntryIntoRole'].errors || form.controls['isManagerialRole'].errors; else validFields">
+        <div class="form-item-role">
+          <mat-error>{{ErrorMessage}}</mat-error>
+        </div>
+      </ng-container>
+      <ng-template #validFields>
+        <mat-error>{{massage}}</mat-error>
+      </ng-template>
+    </ng-container>
+  </div>
+  <div *ngIf="addRoleButton" class="form-row form-item RoleButton ">
+    <button class="save" mat-flat-button color="primary" (click)="saveRole()">Save Role</button>
+    <button mat-flat-button color="warn" (click)="cancelAddRole()">Cancel</button>
+  </div>
+
+  <div class="form-row  form-item button">
+    <button mat-flat-button color="primary" (click)="addRole()" [disabled]="showAddRoleForm">Add Role</button>
+    <button class="save" mat-flat-button color="primary" (click)="saveEmployee()"
+      [disabled]="showAddRoleForm">Save</button>
+  </div>
+
+</form>

@@ -1,0 +1,78 @@
+<h1 class="title">Employee List Management</h1>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+  integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<div>
+
+  <div class="search-box">
+    <input type="text" class="search-txt" (keyup)="applyFilter($event)" placeholder="search" #input>
+    <a class="search-btn">
+      <i class="fas fa-search"></i>
+    </a>
+  </div>
+
+  <button mat-raised-button color="primary" class="option" (click)="addRole()">
+    <mat-icon> playlist_add </mat-icon> Add a Role</button>
+  <button mat-raised-button color="primary" class="option" (click)="addemployee()">
+    <mat-icon> person_add </mat-icon>  Add Employee</button>
+  <button mat-raised-button color="primary" class="option" (click)="exportToExcel()">
+    <mat-icon>download</mat-icon>    Export to Excel  </button>
+</div>
+
+<div class="mat-elevation-z8" (mouseleave)="removeHighlight()">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Identity </th>
+      <td mat-cell *matCellDef="let element"> {{element.identity}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startOfWorkDate">
+      <th mat-header-cell *matHeaderCellDef> Entry date </th>
+      <td mat-cell *matCellDef="let element"> {{ element.startOfWorkDate | date:'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let element">
+
+        <button (click)="navEditEmployee(element)" mat-icon-button color="primary" aria-label="edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="delete(element.id)" mat-icon-button color="primary" aria-label="delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" Class="gray-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (mouseover)="highlightRow(row)"
+      [class.highlighted-row]="row === highlightedRow">
+    </tr>
+    
+
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+    aria-label="Select page of periodic elements"></mat-paginator>
+</div>

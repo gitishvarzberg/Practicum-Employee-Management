@@ -1,0 +1,13 @@
+<button mat-icon-button mat-dialog-close>
+    <mat-icon aria-label="Close dialog">close</mat-icon>
+</button>
+<div class="back">
+    <div class="dialog-panel">
+        <h2>add-role</h2>
+        <mat-form-field appearance="outline">
+            <mat-label>Enter a role name </mat-label>
+            <input matInput [formControl]="roleNameControl">
+        </mat-form-field>
+        <button mat-dialog-close mat-raised-button matSuffix color="primary" (click)="onSubmit()">אישור</button>
+    </div>
+</div>
